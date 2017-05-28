@@ -4,7 +4,7 @@
 
 ### Problem #1
 
-You’re given a list of paths to files on disk. Each file conatins a number and you need to output the final summation of all these numbers.
+You’re given a list of paths to files on disk. Each file contains a number and you need to output the final summation of all these numbers.
 
 
 * [Asynchronous Iterative & Recursive Patterns for Node.js - Part 2](https://mostafa-samir.github.io/async-recursive-patterns-pt2/)
