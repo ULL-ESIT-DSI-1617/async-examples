@@ -4,6 +4,7 @@
 * [Asynchronous Iterative & Recursive Patterns for Node.js - Part 2](https://mostafa-samir.github.io/async-recursive-patterns-pt2/)
 * [npm: simple-barrier](https://www.npmjs.com/package/simple-barrier)
 * [Async utilities for node and the browser http://caolan.github.io/async/](http://caolan.github.io/async/)
+* [Mostafa-Samir.github.io/_posts/](https://github.com/Mostafa-Samir/Mostafa-Samir.github.io/tree/1dad950ce19a4b1bcd94eb78c7da6df4c6f529da/_posts)
 
 ### Problem #1
 
