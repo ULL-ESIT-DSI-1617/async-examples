@@ -9,3 +9,4 @@ You’re given a list of paths to files on disk. Each file conatins a number and
 
 * [Asynchronous Iterative & Recursive Patterns for Node.js - Part 2](https://mostafa-samir.github.io/async-recursive-patterns-pt2/)
 * [npm: simple-barrier](https://www.npmjs.com/package/simple-barrier)
+* [Async utilities for node and the browser http://caolan.github.io/async/](http://caolan.github.io/async/)

@@ -10,6 +10,7 @@
   "author": "Casiano Rodriguez-Leon <casiano.rodriguez.leon@gmail.com> (https://github.com/crguezl)",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.4.1",
     "simple-barrier": "^1.0.4"
   }
 }
