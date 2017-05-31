@@ -24,3 +24,23 @@ Array.prototype.asyncForEach = function(asynTask, callback) {
         asynTask(this[i], barrier)
     }
 };
+
+Array.prototype.pipe = function(asyncTask, callback) {
+
+    var nextItemIndex = 0;  //keep track of the index of the next item to be processed
+
+    nextTask = () => {
+
+        nextItemIndex++;
+
+        // if nextItemIndex equals the number of items in list, then we're done
+        if(nextItemIndex === this.length)
+            callback();
+        else
+            // otherwise, call the asyncTask on the next item
+            asyncTask(this[nextItemIndex], nextTask);
+    }
+
+    // instead of starting all the iterations, we only start the 1st one
+    asyncTask(this[0], nextTask);
+}
