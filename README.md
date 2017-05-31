@@ -10,11 +10,16 @@
 
 You’re given a list of paths to files on disk. Each file contains a number and you need to output the final summation of all these numbers.
 
+- sol1.js : readSync
+- sol1wrong.js: Erroneous solution
+- sol1async.js  
 
 
 ## Problem #1.2
 
 Problem #1 didn't impose any order on the processing of the list of paths, it doesn't matter which file will be read first because the addition's result will always be the same. Lets re-formulate it a little so that the order of processing matters and see what happens.
 
-> You're given a list of paths to files on disk. Each file contains a number and you need to output one string which contains all the numbers read form the files in the order of the paths in the list. However, on each read you must wait a random time that ranges from 0-10 milliseconds before appending the read number to the string.
+> You're given a list of paths to files on disk. Each file contains a number and you need to output one string which contains all the numbers read from the files in the order of the paths in the list. However, on each read you must wait a random time that ranges from 0-10 milliseconds before appending the read number to the string.
 
+- sol12wrong.js
+- sol12.js
