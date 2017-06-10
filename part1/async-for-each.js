@@ -6,7 +6,7 @@ Array.prototype.asyncForEach = function(asynTask, callback) {
 
     var doneCount = 0;  // here we'll keep track of how many reports we've got
 
-    barrier = () => {
+    let barrier = () => {
         // this function resembles the phone number in the analogy above
         // given to each call of the asynTask so it can report its completion
 
@@ -29,7 +29,7 @@ Array.prototype.pipe = function(asyncTask, callback) {
 
     var nextItemIndex = 0;  //keep track of the index of the next item to be processed
 
-    nextTask = () => {
+    let nextTask = () => {
 
         nextItemIndex++;
 
