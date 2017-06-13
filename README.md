@@ -236,3 +236,72 @@ Now we need to give the `loadMetaOf` function the ability to make promises to it
 
 Fortunately, instead of needing to solve the philosophical problem of machine's morality, there's a tool we can use for that!
 
+### Promises and Deferreds
+Promises are a new feature introduced to javascript in ES6, they represent a way to write asynchronous code in a more synchronous way and it's available in Node.js since v4.0, if you haven't installed v4.0 yet (you should btw) you can use third-party implementation like [q](https://www.npmjs.com/package/q).
+
+A `Promise` is essentially a representation of a value that is not available yet but will be resolved in the future. A promise is created using a function that takes two arguments: a **resolve** handler, and a **reject** handler. In this function you write your asynchronous call, and when the value you get from that call is available, you resolve the promise with that value using the resolve handler. And if any error occurs in the process, you reject the promise with that error using the reject handler.
+
+```javascript
+var promise = new Promise(function(resolve, reject) {
+    try {
+        someAsyncCall(function(result) {
+            // the result in now available in the callback
+            resolve(result);
+        });
+    }
+    catch(error) {
+        reject(error);
+    }
+});
+```
+
+Now you have a *promise of a value*, with that you have the ability to wait for that value to be resolved and **then** do some processing on it. This behaviour (called the *thenable* behaviour) is accomplished using the `Promise.then` method that takes two functions: the first which is called if the promise is resolved and it gets passed the resolved value, the other gets called if the promise is rejected and gets passed the rejected value (which is usually an error).
+
+```javascript
+promise
+.then(function(value) {
+    console.log("This is the result of someAsyncCall: ", value);
+}, function(error) {
+    throw error;  // rethrow the error
+});
+```
+
+We see that the promise allowed us to simplify our asynchronous code by limiting the callback to only the report of the value, and all the processing logic of that value is separated to another block (the `then` block) outside the callback in a way that appears to be synchronous. How cool is that!
+
+I'm sufficing with this short introduction to promises as it's all what we need here. If you feel that you need more, you can always check [html5rocks tutorial on promises](http://www.html5rocks.com/en/tutorials/es6/promises/). Now we need to talk about what **Deferreds** are.
+
+A **Deferred** is an extended type of promise, created using `Promise.defer()` method that returns a new promise along with methods (`.resolve` and `.reject`) to change its state (to resolved or to rejected) when needed. As we think of a regular promise as a promise for a value, we can think of a deferred as a promise for work not yet finished. When the work is done, we call the `deferred.resolve` method to change the underlying promise's state to resolved; and if there's an error we call the `deferred.reject` method to change its state to rejected. We can use the underlying promise (accessed via `deffered.promise`) and utilize the thenable behaviour to do other work when the promised work is done.
+
+Here's a pseudo-example of how deferreds can be used:
+
+```javascript
+/*
+ * this is a function that asynchronously bulk inserts several records into a db
+ * @param records [Array]: the records to be bulk inserted
+ * @returns [Promise]: a promise of the work (a.k.a. the bulk insertion) to be done
+ */
+ function bulkInsert(records) {
+    
+    // make your promise before the work starts: create the deferred
+    var deferred = Promise.defer();
+    
+    executeAsyncBulkInsert(records, function(error) {
+        if(error)
+            // report that you couldn't keep your promise because of an error
+            deferred.reject(error);
+        else
+            // report that you kept and fullfilled your promise
+            deferred.resolve();
+    });
+    
+    // give your promise
+    return deferred.promise;
+ }
+ 
+ bulkInsert()
+ .then(refrechView);
+```
+
+I guess it's obvious by now, from the definition of deferreds and from the way I wrote the comments in the above snippet, that deferreds will be our tool to implement the asynchronous analogy we discussed earlier.
+
+
