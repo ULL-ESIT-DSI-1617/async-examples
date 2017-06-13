@@ -99,7 +99,7 @@ This is because that we wouldn't know that we'll need to call the function with 
 
 So we won't be able to use simple iterations like those we worked with in part 1.
 
-A straightforward solution ,to our ignorance of how many times we're gonna need to call the function, is **recursion**. 
+A straightforward solution, to our ignorance of how many times we're gonna need to call the function, is **recursion**. 
 
 We can make our function recursive, so that it would call itself again if the response indicated a dependency, or return if no dependency is indicated.
 
