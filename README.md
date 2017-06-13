@@ -23,3 +23,23 @@ Problem #1 didn't impose any order on the processing of the list of paths, it do
 
 - sol12wrong.js
 - sol12.js
+
+## Problem. #1.3
+
+Synchronize a repl loop in which the tasks to perform are asynchronous.
+
+```
+[~/javascript/async-examples/part1(master)]$ node loop.js 
+> read first-file
+Miracle, Outside!!
+async result = 10
+
+> result
+10
+
+> read second-file
+async result = 7
+
+> result
+7
+```
