@@ -83,6 +83,7 @@ dependency module if exists.
 In this [gist](https://gist.github.com/Mostafa-Samir/8d88882e223a43bbbdef) you'll find a sample node http server that you can run locally to mimic the behaviour of the shared organization server described in the problem. Just open the terminal in the containing folder and run it with `node server`. The server should then be accessible at **http://localhost:8080**.
 
 ### Reasoning about a Solution
+
 The first step we could take to tackle this problem is to create a function that can load the metadata a single module from the server. 
 
 This function (let's call it `loadMetaOf`) is very simple; it takes two arguments: 
@@ -101,4 +102,37 @@ So we won't be able to use simple iterations like those we worked with in part 1
 A straightforward solution ,to our ignorance of how many times we're gonna need to call the function, is **recursion**. 
 
 We can make our function recursive, so that it would call itself again if the response indicated a dependency, or return if no dependency is indicated.
+
+Continuing with the tradition we started in part 1, we begin first with a synchronous approach to the solution we just devised. 
+
+But unfortunately, node doesn't have a synchronous version for its http module (unlike the filesystem `fs` module we used in part 1). So let's for now **imagine** that next to node's asynchronous `http.get` method, there's a synchronous version called `http.getSync` that takes the request url and returns the response body as a string.
+
+A correct, yet imaginary, implementation of our solution above would go like this:
+
+```javascript
+var http = require('http');
+
+function loadMetaOf(name, list) {
+    var response = http.getSync('http://localhost:8080/meta/' + name);
+    var jsonResponse = JSON.parse(response);  // we parse the response string to JSON
+    list.push(name);  // append the module name to the list logged to the user later
+    if(jsonResponse.hasDependency) {
+        loadMetaOf(jsonResponse.dependency, list)
+        return;  // this is useless, but we need here for our discussion
+    }
+    else {
+        return;  // this is also useless
+    }
+}
+
+var list = [];
+loadMetaOf('moduleA', list);
+
+// log the details to the user 
+console.log('fetched all metadata for moduleA');
+console.log('all of the following modules need to be loaded');
+console.log(list);
+```
+
+Can we now use the real `http.get` asynchronous method instead of the imaginary synchronous version and get a correct asynchronous solution?!
 
