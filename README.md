@@ -105,16 +105,17 @@ We can make our function recursive, so that it would call itself again if the re
 
 Continuing with the tradition we started in part 1, we begin first with a synchronous approach to the solution we just devised. 
 
-But unfortunately, node doesn't have a synchronous version for its http module (unlike the filesystem `fs` module we used in part 1). So let's for now **imagine** that next to node's asynchronous `http.get` method, there's a synchronous version called `http.getSync` that takes the request url and returns the response body as a string.
+But unfortunately, node doesn't have a synchronous version for its http module (unlike the filesystem `fs` module we used in part 1). So let's for now use the npm module [sync-request](https://www.npmjs.com/package/sync-request) that allow us to write  a `httpGetSync` that takes the requested url and returns the response body.
 
-A correct, yet imaginary, implementation of our solution above would go like this:
+A correct implementation of our solution above would go like this:
 
 ```javascript
-var http = require('http');
+var request = require('sync-request');
+var httpGetSync = (url) => request('GET', url);
 
 function loadMetaOf(name, list) {
-    var response = http.getSync('http://localhost:8080/meta/' + name);
-    var jsonResponse = JSON.parse(response);  // we parse the response string to JSON
+    var response = httpGetSync('http://localhost:8080/meta/' + name);
+    var jsonResponse = JSON.parse(response.getBody('utf8'));  // we parse the response string as JSON
     list.push(name);  // append the module name to the list logged to the user later
     if(jsonResponse.hasDependency) {
         loadMetaOf(jsonResponse.dependency, list)
@@ -125,13 +126,19 @@ function loadMetaOf(name, list) {
     }
 }
 
+var module = process.argv[2] || 'moduleA';
 var list = [];
-loadMetaOf('moduleA', list);
+loadMetaOf(module, list);
 
 // log the details to the user 
 console.log('fetched all metadata for moduleA');
 console.log('all of the following modules need to be loaded');
 console.log(list);
+/*
+  fetched all metadata for moduleA
+  all of the following modules need to be loaded
+  [ 'moduleA', 'moduleB', 'moduleC' ]
+*/
 ```
 
 Can we now use the real `http.get` asynchronous method instead of the imaginary synchronous version and get a correct asynchronous solution?!
