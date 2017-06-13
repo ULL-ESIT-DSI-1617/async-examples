@@ -205,9 +205,9 @@ Each new part you acquire has an associated note about whether another part in n
 
 You're the one responsible of building the structure once you have all the parts. 
 
-You delegate one of your teammates to go search for the parts, you give him the first part and the associated note along with a bucket to put the parts in
+You delegate one of your teammates to go search for the parts, you give him the first part and the associated note along with a bucket to put the parts in. 
 
-. Because there probably gonna be so many parts, you want have the time to review the bucket's content when your teammate returns it, so you're gonna blindly take it but 
+Because there probably gonna be so many parts, you want have the time to review the bucket's content when your teammate returns it, so you're gonna blindly take it but 
 
 you make him ***promise*** that he won't return the bucket unless all the parts are there, and you know that your teammate is trustworthy and that he's gonna keep his promise. 
 
@@ -215,7 +215,7 @@ You set your teammate off on his journey and you go back to whatever work you ha
 
 Your teammate wants to keep his promise to you, so he's worried about what could go wrong that would prevent him from keeping it. 
 
-He thinks that the only possible thing that would screw things up is that after he collects a part he goes back to rest for a while and in that moment you could see the bucket and take it as you think that he collected all the parts. 
+*He thinks that the only possible thing that would screw things up is that after he collects a part he goes back to rest for a while and in that moment you could see the bucket and take it as you think that he collected all the parts.*
 
 To avoid this, he makes a promise to himself that he won't even take a single step back along the road until he had gone all the way through and collected all the parts.
 
@@ -227,5 +227,12 @@ Pretty harsh terms, but such the burden an honorable and trustworthy man takes u
 
 In the end, because your teammate kept all his promises, you're now able to build the Lego structure successfully.
 
-I guess the analogy is clear now; you resemble the javasctipt global scope and your teammate is the `loadMetaOf` function and its asynchronous work. Now we need to give the `loadMetaOf` function the ability to make promises to itself and to the global scope. Fortunately, instead of needing to solve the philosophical problem of machine's morality, there's a tool we can use for that!
+I guess the analogy is clear now: 
+
+* you resemble the javascript global scope 
+* and your teammate is the `loadMetaOf` function and its asynchronous work. 
+
+Now we need to give the `loadMetaOf` function the ability to make promises to itself and to the global scope. 
+
+Fortunately, instead of needing to solve the philosophical problem of machine's morality, there's a tool we can use for that!
 
