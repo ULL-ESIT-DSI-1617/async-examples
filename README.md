@@ -183,9 +183,49 @@ console.log(list);
 
 Whenever you run this script you're gonna get an empty list of modules instead of a populated list of three modules. So what's the problem?!
 
-The problem is that the usual idea we have about recursion doesn't work with asynchronous calls. The usual idea we have about recursion is that execution will not go past the call `loadMetaOf('moduleA', list)` untill all the recursive calls within are unwound and returned, which means that all operations on `list` are done and it's safe to use its value when the execution goes past the call to `loadMetaOf`, but this is not the case when the function involves an asynchronous call.
+The problem is that the usual idea we have about recursion doesn't work with asynchronous calls. 
 
-What happens here is that `loadMetaOf` doesn't do any of the work itself, it just initiates an asynchronous `http.get` to retrieve the resource over the network and then returns immediately. The actual work will be started by the callback of the `http.get`, which won't be invoked until the connection to the server is made. Moreover, the actual processing of the metadata won't start until the response is fully received from the server.
+The usual idea we have about recursion is that execution will not go past the call `loadMetaOf('moduleA', list)` until all the recursive calls within are unwound and returned, which means that all operations on `list` are done and it's safe to use its value when the execution goes past the call to `loadMetaOf`, but this is not the case when the function involves an asynchronous call.
+
+What happens here is that `loadMetaOf` doesn't do any of the work itself, it just initiates an asynchronous `http.get` to retrieve the resource over the network and then returns immediately. 
+
+The actual work will be started by the callback of the `http.get`, which won't be invoked until the connection to the server is made. 
+
+Moreover, the actual processing of the metadata won't start until the response is fully received from the server.
 
 By the time all this waiting to happen, the execution would have already gone past the `loadMetaOf('moduleA', list)` line and printed the list with its empty initial value before any work could be done on it. 
+
+### A Correct Asynchronous Approach
+
+Now let's imagine that you're gonna simulate this problem on a human scale. 
+
+Instead of downloading a module from a remote server, you're building a Lego structure where the parts you need are stored in several storage facilities. 
+
+Each new part you acquire has an associated note about whether another part in needed and from which storage facility you can get it.
+
+You're the one responsible of building the structure once you have all the parts. 
+
+You delegate one of your teammates to go search for the parts, you give him the first part and the associated note along with a bucket to put the parts in
+
+. Because there probably gonna be so many parts, you want have the time to review the bucket's content when your teammate returns it, so you're gonna blindly take it but 
+
+you make him ***promise*** that he won't return the bucket unless all the parts are there, and you know that your teammate is trustworthy and that he's gonna keep his promise. 
+
+You set your teammate off on his journey and you go back to whatever work you have until he comes back.
+
+Your teammate wants to keep his promise to you, so he's worried about what could go wrong that would prevent him from keeping it. 
+
+He thinks that the only possible thing that would screw things up is that after he collects a part he goes back to rest for a while and in that moment you could see the bucket and take it as you think that he collected all the parts. 
+
+To avoid this, he makes a promise to himself that he won't even take a single step back along the road until he had gone all the way through and collected all the parts.
+
+We can see that the promises your teammate made to you and to himself; 
+
+they both constitute one big promise that once on the road, he won't go a single step back until all the work is done. 
+
+Pretty harsh terms, but such the burden an honorable and trustworthy man takes upon himself!
+
+In the end, because your teammate kept all his promises, you're now able to build the Lego structure successfully.
+
+I guess the analogy is clear now; you resemble the javasctipt global scope and your teammate is the `loadMetaOf` function and its asynchronous work. Now we need to give the `loadMetaOf` function the ability to make promises to itself and to the global scope. Fortunately, instead of needing to solve the philosophical problem of machine's morality, there's a tool we can use for that!
 
