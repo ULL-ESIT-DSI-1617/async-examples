@@ -107,7 +107,7 @@ Continuing with the tradition we started in part 1, we begin first with a synchr
 
 But unfortunately, node doesn't have a synchronous version for its http module (unlike the filesystem `fs` module we used in part 1). So let's for now use the npm module [sync-request](https://www.npmjs.com/package/sync-request) that allow us to write  a `httpGetSync` that takes the requested url and returns the response body.
 
-A correct implementation of our solution above would go like this:
+A correct implementation of our solution above is in `part2/sync-sol.js`:
 
 ```javascript
 var request = require('sync-request');
