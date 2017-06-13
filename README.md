@@ -291,12 +291,22 @@ Now we need to talk about what **Deferreds** are.
 A **Deferred** is an extended type of promise, created using
 `Promise.defer()` method that returns a new promise along with
 methods (`.resolve` and `.reject`) to change its state (to resolved
-or to rejected) when needed. As we think of a regular promise as a
+or to rejected) when needed. 
+
+
+As we think of a regular promise as a
 promise for a value, we can think of a deferred as a promise for
-work not yet finished. When the work is done, we call the
+work not yet finished. 
+
+
+When the work is done, we call the
 `deferred.resolve` method to change the underlying promise's state
-to resolved; and if there's an error we call the `deferred.reject`
-method to change its state to rejected. We can use the underlying
+to resolved; 
+
+and if there's an error we call the `deferred.reject`
+method to change its state to rejected. 
+
+We can use the underlying
 promise (accessed via `deffered.promise`) and utilize the thenable
 behaviour to do other work when the promised work is done.
 
