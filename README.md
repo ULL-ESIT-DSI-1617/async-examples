@@ -43,3 +43,34 @@ async result = 7
 > result
 7
 ```
+
+## Problem 2
+
+You and your team are creating a module system for your little
+organization (something that’s very similar to npm, but private to
+your organization). 
+
+The system should be able to load a module on
+demand from a shared organization server. 
+
+Each module can have at
+most one other module as a dependency, and when a module is fetched,
+its dependency and its dependency’s dependency (and so on…) should
+be fetched as well to ensure that the module will work correctly.
+
+Your task now is to write a script that runs before downloading the
+module that queries the metadata of the module on the server to
+determine the list of all modules and dependencies that you’ll need
+to download. 
+
+All modules metadata reside on the route
+`/meta/{module_name}`, and it should be retrieved using a `GET`
+request. 
+
+Each request returns a JSON response with at most two
+fields: 
+
+1. `hasDependency` that is true if the module has a dependency,
+false otherwise; and 
+2. `dependency` which contains the name of the
+dependency module if exists.
