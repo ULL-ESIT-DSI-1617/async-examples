@@ -55,7 +55,7 @@ demand from a shared organization server.
 
 Each module can have at
 most one other module as a dependency, and when a module is fetched,
-its dependency and its dependency’s dependency (and so on…) should
+its dependency and its dependency’s dependency (and so on ...) should
 be fetched as well to ensure that the module will work correctly.
 
 Your task now is to write a script that runs before downloading the
