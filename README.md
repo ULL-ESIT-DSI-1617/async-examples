@@ -141,5 +141,51 @@ console.log(list);
 */
 ```
 
-Can we now use the real `http.get` asynchronous method instead of the imaginary synchronous version and get a correct asynchronous solution?!
+Can we now use the real `http.get` asynchronous method instead of the synchronous version and get a correct asynchronous solution?!
+
+### A Wrong Asynchronous Solution
+
+```javascript
+var http = require('http');
+
+function loadMetaOf(name, list) {
+    http.get('http://localhost:8080/meta/' + name, function(response) {
+        
+        var responseBody = "";  // will hold the response body as it comes
+        
+        // join the data chuncks as they come
+        response.on('data', function(chunck) { responseBody += chunck });
+        
+        response.on('end', function() {
+            
+            var jsonResponse = JSON.parse(responseBody);
+            list.push(name);
+            
+            if(jsonResponse.hasDependency) {
+                loadMetaOf(jsonResponse.dependency, list);
+                return;  // this is useless, but we need here for our discussion
+            }
+            else {
+                return;  // this is also usless
+            }
+        });
+    });
+}
+
+var list = [];
+loadMetaOf('moduleA', list);
+
+// log the details to the user 
+console.log('fetched all metadata for moduleA');
+console.log('all of the following modules need to be loaded');
+console.log(list);
+```
+
+Whenever you run this script you're gonna get an empty list of modules instead of a populated list of three modules. So what's the problem?!
+
+The problem is that the usual idea we have about recursion doesn't work with asynchronous calls. The usual idea we have about recursion is that execution will not go past the call `loadMetaOf('moduleA', list)` untill all the recursive calls within are unwound and returned, which means that all operations on `list` are done and it's safe to use its value when the execution goes past the call to `loadMetaOf`, but this is not the case when the function involves an asynchronous call.
+
+What happens here is that `loadMetaOf` doesn't do any of the work itself, it just initiates an asynchronous `http.get` to retrieve the resource over the network and then returns immediately. The actual work will be started by the callback of the `http.get`, which won't be invoked until the connection to the server is made. Moreover, the actual processing of the metadata won't start until the response is fully received from the server.
+
+By the time all this waiting to happen, the execution would have already gone past the `loadMetaOf('moduleA', list)` line and printed the list with its empty initial value before any work could be done on it. 
 
