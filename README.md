@@ -1,3 +1,8 @@
+# Learning Asynchonous Programming in JS
+
+This is a repo with my experiences learning Asynchronous Programming in JS, following tutorials I have found interesting. Thanks to the authors.
+
+
 ## Asynchronous Iterative & Recursive Patterns for Node.js - Part 1
 
 * [Asynchronous Iterative & Recursive Patterns for Node.js - Part 1](https://mostafa-samir.github.io/async-iterative-patterns-pt1/)
@@ -74,3 +79,26 @@ fields:
 false otherwise; and 
 2. `dependency` which contains the name of the
 dependency module if exists.
+
+In this [gist](https://gist.github.com/Mostafa-Samir/8d88882e223a43bbbdef) you'll find a sample node http server that you can run locally to mimic the behaviour of the shared organization server described in the problem. Just open the terminal in the containing folder and run it with `node server`. The server should then be accessible at **http://localhost:8080**.
+
+### Reasoning about a Solution
+The first step we could take to tackle this problem is to create a function that can load the metadata a single module from the server. 
+
+This function (let's call it `loadMetaOf`) is very simple; it takes two arguments: 
+
+1. the name of the module we want to load its metadata, and 
+2. an array that represents the list of all modules that will need to be loaded. 
+
+This function initiates a GET request to the server to retrieve the module's metadata and appends its name to the list when the response comes.
+
+From the problem's description, it's obvious that we're gonna need to call this function many times to retrieve all the dependencies, but unfortunately we don't know how many times! 
+
+This is because that we wouldn't know that we'll need to call the function with another module unless we get the response from the previous call and it indicated that there's a dependency that needs to be loaded. 
+
+So we won't be able to use simple iterations like those we worked with in part 1.
+
+A straightforward solution ,to our ignorance of how many times we're gonna need to call the function, is **recursion**. 
+
+We can make our function recursive, so that it would call itself again if the response indicated a dependency, or return if no dependency is indicated.
+
