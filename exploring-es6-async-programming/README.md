@@ -30,3 +30,12 @@ In this pattern for asynchronously receiving results, you create an object for e
 
 The code in [xmlhttprequest.html](xmlhttprequest.html) shows how that works with the XMLHttpRequest API:
 
+  <ul>
+    <li>
+      <a href="http://exploringjs.com/es6/ch_async.html#sec_receiving-results-asynchronously">Asynchronous results via events</a>
+    </li>
+    <li>
+      <a href="https://codepen.io/rimager/pen/duhkF">Super Simple API Request</a> CodePen
+    </li>
+  </ul>
+
