@@ -28,5 +28,5 @@ In this pattern for asynchronously receiving results, you create an object for e
 1. one for a successful computation, 
 2. another one for handling errors. 
 
-The code in `xmlhttprequest.html` shows how that works with the XMLHttpRequest API:
+The code in [xmlhttprequest.html](xmlhttprequest.html) shows how that works with the XMLHttpRequest API:
 

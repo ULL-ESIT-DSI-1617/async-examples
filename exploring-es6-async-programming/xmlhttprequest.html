@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Asynchronous results via events</title>
+</head>
+<body>
+  <h1>Super Simple API call using XMLHttpRequest</h1>
+  <ul>
+    <li>
+      <a href="http://exploringjs.com/es6/ch_async.html#sec_receiving-results-asynchronously">Asynchronous results via events</a>
+    </li>
+    <li>
+      <a href="https://codepen.io/rimager/pen/duhkF">Super Simple API Request</a> CodePen
+    </li>
+  </ul>
+  <div id="result"></div>
+	<script type="text/javascript">
+    let pre = (x) => '<pre>'+x+'</pre>';
+    let processData = () => {
+			let cover = JSON.parse(xhr.responseText).items[0].volumeInfo.imageLinks.thumbnail;
+      document.getElementById("result").innerHTML =
+			'<img src="'+cover+'" />'+
+			"<h2>xhr.status</h2>"+ xhr.status+
+      "<h2>xhr.statusTest</h2>"+ xhr.statusText+
+			"<h2>xhr.response</h2>"+ pre(xhr.response)+
+			"<h2>xhr.responseText</h2>"+ pre(xhr.responseText)+
+			"<h2>xhr.responseXML</h2>"+ xhr.responseXML;
+    };
+
+		var xhr = new XMLHttpRequest();
+		/*
+		Initializes the request:
+		void open(
+		 in AUTF8String method,
+		 in AUTF8String url,
+		 [optional] in boolean async, // defaulting to true, whether or not to perform the operation asynchronously.
+		 [optional] in AString user, // user name to use for authentication purposes; by default, this is an empty string.
+		 [optional] in AString password // password to use for authentication purposes;
+		);
+		*/
+		xhr.open("GET", "https://www.googleapis.com/books/v1/volumes?q=isbn:1484224930", true);
+
+    xhr.onload = () => {
+			if (xhr.status == 200) {
+        processData(xhr.response);
+			} else {
+        console.log('ERROR', xhr.statusText);
+      }
+    };
+
+		xhr.onerror = function () {
+				console.log('Network Error');
+		};
+
+		/*
+		Sends the request. If the request is asynchronous (which is the default), this method returns as soon as the request is sent. If the request is synchronous, this method doesn't return until the response has arrived.
+		*/
+		xhr.send();
+
+	</script>
+</body>
+</html>
