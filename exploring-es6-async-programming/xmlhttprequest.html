@@ -57,6 +57,8 @@
 		Sends the request. If the request is asynchronous (which is the default), this method returns as soon as the request is sent. If the request is synchronous, this method doesn't return until the response has arrived.
 		*/
 		xhr.send();
+    /* Note that the xhr.send() line doesn’t actually perform the request, it adds it to the task queue. Therefore, you could also call that method right after open(), before setting up onload and onerror. Things would work the same, due to JavaScript’s run-to-completion semantics.
+    */
 
 	</script>
 </body>
