@@ -16,3 +16,17 @@
             <a href="http://exploringjs.com/es6/ch_async.html#sec_further-reading-async"><span class="section-number">24.5 </span>Further reading</a>
           </li>
         </ol>
+
+### Receiving results asynchronously 
+
+Two common patterns for receiving results asynchronously are: events and callbacks.
+
+#### Asynchronous results via events 
+
+In this pattern for asynchronously receiving results, you create an object for each request and register event handlers with it: 
+
+1. one for a successful computation, 
+2. another one for handling errors. 
+
+The code shows how that works with the XMLHttpRequest API:
+
