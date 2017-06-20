@@ -1,3 +1,5 @@
+### Index of the Asynchronous Programming Chapter of the book "Exploring ES6"
+
 * [24. Asynchronous programming (background)](http://exploringjs.com/es6/ch_async.html)
 <ol>
   <li> <a href="http://exploringjs.com/es6/ch_async.html#sec_javascript-call-stack"><span class="section-number">24.1 </span>The JavaScript call stack</a> </li>
