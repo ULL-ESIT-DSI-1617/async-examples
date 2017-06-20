@@ -1,0 +1,3 @@
+[submodule "simple-web-worker"]
+	path = simple-web-worker
+	url = git@github.com:SYTW/simple-web-worker.git
