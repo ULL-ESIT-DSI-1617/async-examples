@@ -195,3 +195,7 @@ Moreover, the actual processing of the metadata won't start until the response i
 
 By the time all this waiting to happen, the execution would have already gone past the `loadMetaOf('moduleA', list)` line and printed the list with its empty initial value before any work could be done on it. 
 
+# References and Books
+
+* [Exploring ES6 Axel Rauschmayer](http://exploringjs.com/es6/index.html#toc_ch_async)
+* [Understanding ECMAScript 6](https://leanpub.com/understandinges6/read/)
