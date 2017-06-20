@@ -26,7 +26,7 @@ you can’t click the "Simple button".
 You avoid blocking the event loop in two ways:
 
 1. First, you don’t perform long-running computations in the main process, you move them to a different process. This can be achieved via the 
-[Worker API](https://developer.mozilla.org/en/docs/Web/API/Worker).
+[Worker API](https://github.com/SYTW/simple-web-worker/tree/8fe44aa1b892d266543dbc060c7ac85cb181aee4)
 
 2. Second, you don’t (synchronously) wait for the results of a long-running computation (your own algorithm in a Worker process, a network request, etc.), you carry on with the event loop and let the computation notify you when it is finished. 
 
