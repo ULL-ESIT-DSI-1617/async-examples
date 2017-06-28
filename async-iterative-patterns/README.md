@@ -195,16 +195,3 @@ Moreover, the actual processing of the metadata won't start until the response i
 
 By the time all this waiting to happen, the execution would have already gone past the `loadMetaOf('moduleA', list)` line and printed the list with its empty initial value before any work could be done on it. 
 
-# References and Books
-
-## Asynchronous Iterative & Recursive Patterns for Node.js - Part 1
-
-* [Asynchronous Iterative & Recursive Patterns for Node.js - Part 1](https://mostafa-samir.github.io/async-iterative-patterns-pt1/)
-* [Asynchronous Iterative & Recursive Patterns for Node.js - Part 2](https://mostafa-samir.github.io/async-recursive-patterns-pt2/)
-* [npm: simple-barrier](https://www.npmjs.com/package/simple-barrier)
-* [Async utilities for node and the browser http://caolan.github.io/async/](http://caolan.github.io/async/)
-* [Mostafa-Samir.github.io/_posts/](https://github.com/Mostafa-Samir/Mostafa-Samir.github.io/tree/1dad950ce19a4b1bcd94eb78c7da6df4c6f529da/_posts)
-
-
-* [Exploring ES6 Axel Rauschmayer](http://exploringjs.com/es6/index.html#toc_ch_async)
-* [Understanding ECMAScript 6](https://leanpub.com/understandinges6/read/)
