@@ -4,7 +4,7 @@ This is a repo with my experiences learning Asynchronous Programming in JS, foll
 
 # References and Books
 
-## Asynchronous Iterative & Recursive Patterns for Node.js - Part 1
+## Asynchronous Iterative & Recursive Patterns for Node.js 
 
 * [Asynchronous Iterative & Recursive Patterns for Node.js - Part 1](https://mostafa-samir.github.io/async-iterative-patterns-pt1/)
 * [Asynchronous Iterative & Recursive Patterns for Node.js - Part 2](https://mostafa-samir.github.io/async-recursive-patterns-pt2/)
