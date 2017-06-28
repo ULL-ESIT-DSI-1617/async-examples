@@ -1,7 +1,4 @@
-require('async-for-each');
-
 var fs = require('fs');
-
 var paths = [
              'first-file',  // contains 10
              'second-file',  // contains 7
@@ -9,15 +6,14 @@ var paths = [
              ];
 var FinalResult = "";
 
-paths.asyncForEach(function(path, barrier) {
+paths.forEach(function(path) {
     fs.readFile(path, 'utf8', function(err, data) {
 
         // here we wait for random time
         setTimeout(function() {
             FinalResult += data.replace(/^\s*|\s*$/g,'')+ " ";
-
-            barrier();
+            console.log(FinalResult);
         }, Math.floor(Math.random() * 10));
 
     });
-}, () => console.log(FinalResult));
+}, () => console.log("FinalResult = "+FinalResult));
