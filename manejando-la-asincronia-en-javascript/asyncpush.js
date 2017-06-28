@@ -17,6 +17,7 @@ addToArray(4, array, function (err) {
 })
 console.log(array); // [ 1, 2, 3 ]
 
+// El temido Callback Hell o Pyramid of Doom
 addToArray(4, array, function (err) {  
   if (err) return console.log(err.message)
   addToArray(5, array, function (err) {
