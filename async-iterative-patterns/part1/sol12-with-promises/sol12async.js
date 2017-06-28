@@ -13,12 +13,16 @@ function printTotalSum() { console.log("finalResult = <"+finalResult+">"); }
 
 function readFile(file) {
   return new Promise(function(resolve, reject) {
-    fs.readFile(file, 'utf8', function(err, data) {
+    let readFile = () => { 
+      fs.readFile(file, 'utf8', function(err, data) {
       finalResult.push(data.replace(/\s+/g,''));
       //console.log(finalResult);
       resolve();
     });
-  })
+   };
+   setTimeout(readFile, Math.floor(Math.random() * 1000));
+  }
+  )
 }
 
 paths.seqAsync(readFile, printTotalSum);
