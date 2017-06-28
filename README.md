@@ -1,3 +1,7 @@
+# Learning Asynchonous Programming in JS
+
+This is a repo with my experiences learning Asynchronous Programming in JS, following tutorials I have found interesting. Thanks to the authors.
+
 # References and Books
 
 ## Asynchronous Iterative & Recursive Patterns for Node.js - Part 1
