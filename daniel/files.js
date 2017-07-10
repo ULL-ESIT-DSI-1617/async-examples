@@ -1,4 +1,5 @@
 const fs = require('fs-extra');
+const glob = require('glob');
 
 try {
 	fs.readFile('README.md').then(data => {
@@ -14,7 +15,9 @@ try {
 			Promise.all(promises).then(() => {
 				console.log('Hecho')
 			}).catch(err => {
-				console.log(err.message);
+				glob('*.md', {}, (file) => { console.log(file); // fs.unlink(file); 
+         });
+				console.log("borrado: "+err.message);
 			})
 		}).catch(err => {
 			console.log(err.message);
